@@ -1,0 +1,39 @@
+{
+    "project_info": {
+      "project_number": "686743176722",
+      "project_id": "cabdriver-9b067",
+      "storage_bucket": "cabdriver-9b067.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:686743176722:android:d86a6ac0644cffbb0f7acb",
+          "android_client_info": {
+            "package_name": "com.cabme.driver"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "686743176722-0thl3m3h05pr17t4c20cb08lp75hq929.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyAHJHmPA7M3trv0TPFiliqd_Rc2SBoIX5E"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "686743176722-0thl3m3h05pr17t4c20cb08lp75hq929.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
