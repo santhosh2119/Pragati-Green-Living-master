@@ -80,33 +80,48 @@ class MyProfileScreen extends StatelessWidget {
                               Center(
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
-                                  child: myProfileController.profileImage.isEmpty
+                                  child: myProfileController
+                                          .profileImage.isEmpty
                                       ? CachedNetworkImage(
-                                          imageUrl: "https://cabme.siswebapp.com/assets/images/placeholder_image.jpg",
+                                          imageUrl:
+                                              "https://cabme.siswebapp.com/assets/images/placeholder_image.jpg",
                                           height: 130,
                                           width: 130,
                                           fit: BoxFit.cover,
-                                          progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                                            child: CircularProgressIndicator(value: downloadProgress.progress),
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Center(
+                                            child: CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress),
                                           ),
-                                          errorWidget: (context, url, error) => const Icon(Icons.error),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
                                         )
                                       : CachedNetworkImage(
-                                          imageUrl: myProfileController.profileImage.toString(),
+                                          imageUrl: myProfileController
+                                              .profileImage
+                                              .toString(),
                                           height: 130,
                                           width: 130,
                                           fit: BoxFit.cover,
-                                          progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                                            child: CircularProgressIndicator(value: downloadProgress.progress),
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Center(
+                                            child: CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress),
                                           ),
-                                          errorWidget: (context, url, error) => const Icon(Icons.error),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
                                         ),
                                 ),
                               ),
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: InkWell(
-                                  onTap: () => buildBottomSheet(context, myProfileController),
+                                  onTap: () => buildBottomSheet(
+                                      context, myProfileController),
                                   child: ClipOval(
                                     child: Container(
                                       color: Colors.white,
@@ -139,13 +154,16 @@ class MyProfileScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 5),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 4.0, vertical: 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
                                 Text(
                                   "Personal Information",
-                                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -155,37 +173,39 @@ class MyProfileScreen extends StatelessWidget {
                             subtitle: myProfileController.name.toString(),
                             title: "First Name",
                             iconData: Icons.person_outline,
-                            isEditIcon: true,
+                            isEditIcon: false,
                             onPress: () {
-                              buildAlertChangeData(
-                                context,
-                                onSubmitBtn: () {
-                                  if (nameController.text.isNotEmpty) {
-                                    myProfileController.updateFirstName({
-                                      "id_user": myProfileController.userID.value,
-                                      "prenom": nameController.text,
-                                      "user_cat": "driver",
-                                    }).then((value) {
-                                      Get.back();
-                                      if (value == true) {
-                                        ShowToastDialog.showToast("Updated!!");
-                                        dashboardController.getUsrData();
-                                      } else {
-                                        ShowToastDialog.showToast("Unable to Updated!!");
-                                      }
-                                    });
-                                  }
-                                },
-                                controller: nameController,
-                                title: "Name",
-                                validators: (String? value) {
-                                  if (value != null || value!.isNotEmpty) {
-                                    return null;
-                                  } else {
-                                    return "*required";
-                                  }
-                                },
-                              );
+                              // buildAlertChangeData(
+                              //   context,
+                              //   onSubmitBtn: () {
+                              //     if (nameController.text.isNotEmpty) {
+                              //       myProfileController.updateFirstName({
+                              //         "id_user":
+                              //             myProfileController.userID.value,
+                              //         "prenom": nameController.text,
+                              //         "user_cat": "driver",
+                              //       }).then((value) {
+                              //         Get.back();
+                              //         if (value == true) {
+                              //           ShowToastDialog.showToast("Updated!!");
+                              //           dashboardController.getUsrData();
+                              //         } else {
+                              //           ShowToastDialog.showToast(
+                              //               "Unable to Updated!!");
+                              //         }
+                              //       });
+                              //     }
+                              //   },
+                              //   controller: nameController,
+                              //   title: "Name",
+                              //   validators: (String? value) {
+                              //     if (value != null || value!.isNotEmpty) {
+                              //       return null;
+                              //     } else {
+                              //       return "*required";
+                              //     }
+                              //   },
+                              // );
                             },
                           ),
 
@@ -193,44 +213,51 @@ class MyProfileScreen extends StatelessWidget {
                             subtitle: myProfileController.lastName.toString(),
                             title: "Last Name",
                             iconData: Icons.person_outline,
-                            isEditIcon: true,
+                            isEditIcon: false,
                             onPress: () {
-                              buildAlertChangeData(
-                                context,
-                                onSubmitBtn: () {
-                                  if (lastNameController.text.isNotEmpty) {
-                                    myProfileController.updateLastName({
-                                      "id_user": myProfileController.userID.value,
-                                      "nom": lastNameController.text,
-                                      "user_cat": "driver",
-                                    }).then((value) {
-                                      if (value != null) {
-                                        if (value["success"] == "success") {
-                                          UserModel userModel = Constant.getUserData();
-                                          userModel.userData!.nom = value['data']['nom'];
-                                          Preferences.setString(Preferences.user, jsonEncode(userModel.toJson()));
-                                          myProfileController.getUsrData();
-                                          dashboardController.getUsrData();
-                                          ShowToastDialog.showToast(value['message']);
-                                          Get.back();
-                                        } else {
-                                          ShowToastDialog.showToast(value['error']);
-                                          Get.back();
-                                        }
-                                      }
-                                    });
-                                  }
-                                },
-                                controller: lastNameController,
-                                title: "Last Name",
-                                validators: (String? value) {
-                                  if (value != null || value!.isNotEmpty) {
-                                    return null;
-                                  } else {
-                                    return "*required";
-                                  }
-                                },
-                              );
+                              // buildAlertChangeData(
+                              //   context,
+                              //   onSubmitBtn: () {
+                              //     if (lastNameController.text.isNotEmpty) {
+                              //       myProfileController.updateLastName({
+                              //         "id_user":
+                              //             myProfileController.userID.value,
+                              //         "nom": lastNameController.text,
+                              //         "user_cat": "driver",
+                              //       }).then((value) {
+                              //         if (value != null) {
+                              //           if (value["success"] == "success") {
+                              //             UserModel userModel =
+                              //                 Constant.getUserData();
+                              //             userModel.userData!.nom =
+                              //                 value['data']['nom'];
+                              //             Preferences.setString(
+                              //                 Preferences.user,
+                              //                 jsonEncode(userModel.toJson()));
+                              //             myProfileController.getUsrData();
+                              //             dashboardController.getUsrData();
+                              //             ShowToastDialog.showToast(
+                              //                 value['message']);
+                              //             Get.back();
+                              //           } else {
+                              //             ShowToastDialog.showToast(
+                              //                 value['error']);
+                              //             Get.back();
+                              //           }
+                              //         }
+                              //       });
+                              //     }
+                              //   },
+                              //   controller: lastNameController,
+                              //   title: "Last Name",
+                              //   validators: (String? value) {
+                              //     if (value != null || value!.isNotEmpty) {
+                              //       return null;
+                              //     } else {
+                              //       return "*required";
+                              //     }
+                              //   },
+                              // );
                             },
                           ),
 
@@ -267,38 +294,45 @@ class MyProfileScreen extends StatelessWidget {
 
                           /// For Vehicle Information
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 5),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 4.0, vertical: 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
                                 Text(
                                   "Vehicle Information",
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                           ),
 
                           buildShowDetails(
-                            subtitle: myProfileController.selectedCategory.toString(),
-                            title: "Category",
+                            subtitle:
+                                myProfileController.selectedCategory.toString(),
+                            title: "Vehicle Type",
                             iconData: Icons.branding_watermark_outlined,
                             isEditIcon: true,
                             onPress: () {
-                              vehicleCategoryDialog(context, myProfileController);
+                              vehicleCategoryDialog(
+                                  context, myProfileController);
                             },
                           ),
                           buildShowDetails(
                             subtitle: myProfileController.vBrand.toString(),
-                            title: "Brand",
+                            title: "Vehicle Brand",
                             iconData: Icons.branding_watermark_outlined,
                             isEditIcon: true,
                             onPress: () {
                               myProfileController.getBrand().then((value) {
                                 if (value!.isNotEmpty) {
-                                  brandDialog(context, value, myProfileController);
+                                  brandDialog(
+                                      context, value, myProfileController);
                                 } else {
-                                  ShowToastDialog.showToast("Please contact administrator");
+                                  ShowToastDialog.showToast(
+                                      "Please contact administrator");
                                 }
                               });
                               // buildAlertChangeData(
@@ -328,24 +362,30 @@ class MyProfileScreen extends StatelessWidget {
                           ),
                           buildShowDetails(
                             subtitle: myProfileController.vModel.toString(),
-                            title: "Model",
+                            title: "Vehicle Model",
                             iconData: Icons.branding_watermark_outlined,
                             isEditIcon: true,
                             onPress: () {
                               if (myProfileController.vBrand.value.isNotEmpty) {
                                 Map<String, String> bodyParams = {
                                   'brand': myProfileController.vBrand.value,
-                                  'vehicle_type': myProfileController.selectedCategoryID.value,
+                                  'vehicle_type': myProfileController
+                                      .selectedCategoryID.value,
                                 };
-                                myProfileController.getModel(bodyParams).then((value) {
+                                myProfileController
+                                    .getModel(bodyParams)
+                                    .then((value) {
                                   if (value!.isNotEmpty) {
-                                    modelDialog(context, value, myProfileController);
+                                    modelDialog(
+                                        context, value, myProfileController);
                                   } else {
-                                    ShowToastDialog.showToast("Please contact administrator");
+                                    ShowToastDialog.showToast(
+                                        "Please contact administrator");
                                   }
                                 });
                               } else {
-                                ShowToastDialog.showToast("Please select brand");
+                                ShowToastDialog.showToast(
+                                    "Please select brand");
                               }
                               // buildAlertChangeData(
                               //   context,
@@ -374,8 +414,8 @@ class MyProfileScreen extends StatelessWidget {
                           ),
                           buildShowDetails(
                             subtitle: myProfileController.vColor.toString(),
-                            title: "Color",
-                            iconData: Icons.color_lens_outlined,
+                            title: "Vehicle Year",
+                            iconData: Icons.calendar_month,
                             isEditIcon: true,
                             onPress: () {
                               buildAlertChangeData(
@@ -383,20 +423,22 @@ class MyProfileScreen extends StatelessWidget {
                                 onSubmitBtn: () {
                                   if (vColorController.text.isNotEmpty) {
                                     myProfileController.updateVColor({
-                                      "id_conducteur": myProfileController.userID.value,
+                                      "id_conducteur":
+                                          myProfileController.userID.value,
                                       "color": vColorController.text,
                                     }).then((value) {
                                       Get.back();
                                       if (value == true) {
                                         ShowToastDialog.showToast("Updated!!");
                                       } else {
-                                        ShowToastDialog.showToast("Unable to Updated!!");
+                                        ShowToastDialog.showToast(
+                                            "Unable to Updated!!");
                                       }
                                     });
                                   }
                                 },
                                 controller: vColorController,
-                                title: "Color",
+                                title: "Year",
                                 validators: (String? email) {
                                   return null;
                                 },
@@ -405,24 +447,29 @@ class MyProfileScreen extends StatelessWidget {
                           ),
 
                           buildShowDetails(
-                            subtitle: myProfileController.vCarRegistration.toString(),
-                            title: "Car Registration",
+                            subtitle:
+                                myProfileController.vCarRegistration.toString(),
+                            title: "Registration No",
                             iconData: Icons.branding_watermark_outlined,
                             isEditIcon: true,
                             onPress: () {
                               buildAlertChangeData(
                                 context,
                                 onSubmitBtn: () {
-                                  if (vCarRegistrationController.text.isNotEmpty) {
+                                  if (vCarRegistrationController
+                                      .text.isNotEmpty) {
                                     myProfileController.updateVNumberPlate({
-                                      "id_conducteur": myProfileController.userID.value,
-                                      "numberplate": vCarRegistrationController.text,
+                                      "id_conducteur":
+                                          myProfileController.userID.value,
+                                      "numberplate":
+                                          vCarRegistrationController.text,
                                     }).then((value) {
                                       Get.back();
                                       if (value == true) {
                                         ShowToastDialog.showToast("Updated!!");
                                       } else {
-                                        ShowToastDialog.showToast("Unable to Updated!!");
+                                        ShowToastDialog.showToast(
+                                            "Unable to Updated!!");
                                       }
                                     });
                                   }
@@ -471,16 +518,27 @@ class MyProfileScreen extends StatelessWidget {
                                               child: ButtonThem.buildButton(
                                                 context,
                                                 title: 'Yes',
-                                                btnColor: ConstantColors.primary,
+                                                btnColor:
+                                                    ConstantColors.primary,
                                                 txtColor: Colors.white,
                                                 onPress: () {
-                                                  myProfileController.deleteAccount(myProfileController.userID.toString()).then((value) {
+                                                  myProfileController
+                                                      .deleteAccount(
+                                                          myProfileController
+                                                              .userID
+                                                              .toString())
+                                                      .then((value) {
                                                     if (value != null) {
-                                                      if (value["success"] == "success") {
-                                                        ShowToastDialog.showToast(value['message']);
+                                                      if (value["success"] ==
+                                                          "success") {
+                                                        ShowToastDialog
+                                                            .showToast(value[
+                                                                'message']);
                                                         Get.back();
-                                                        Preferences.clearSharPreference();
-                                                        Get.offAll(LoginScreen());
+                                                        Preferences
+                                                            .clearSharPreference();
+                                                        Get.offAll(
+                                                            LoginScreen());
                                                       }
                                                     }
                                                   });
@@ -536,12 +594,13 @@ class MyProfileScreen extends StatelessWidget {
     );
   }
 
-  vehicleCategoryDialog(BuildContext context, MyProfileController myProfileController) {
+  vehicleCategoryDialog(
+      BuildContext context, MyProfileController myProfileController) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Catogory list'),
+            title: const Text('Vehicle Type'),
             content: SizedBox(
               height: 300.0, // Change as per your requirement
               width: 300.0, // Change as per your requirement
@@ -554,24 +613,36 @@ class MyProfileScreen extends StatelessWidget {
                         return ListTile(
                           title: InkWell(
                               onTap: () {
-                                myProfileController.selectedCategory.value = myProfileController.vehicleCategoryList[index].libelle.toString();
-                                myProfileController.selectedCategoryID.value = myProfileController.vehicleCategoryList[index].id.toString();
-                                if (myProfileController.selectedCategoryID.value.isNotEmpty) {
+                                myProfileController.selectedCategory.value =
+                                    myProfileController
+                                        .vehicleCategoryList[index].libelle
+                                        .toString();
+                                myProfileController.selectedCategoryID.value =
+                                    myProfileController
+                                        .vehicleCategoryList[index].id
+                                        .toString();
+                                if (myProfileController
+                                    .selectedCategoryID.value.isNotEmpty) {
                                   myProfileController.updateVCategory({
-                                    "id_conducteur": myProfileController.userID.value,
-                                    "id_vehicle_type": myProfileController.selectedCategoryID.value,
+                                    "id_conducteur":
+                                        myProfileController.userID.value,
+                                    "id_vehicle_type": myProfileController
+                                        .selectedCategoryID.value,
                                   }).then((value) {
                                     Get.back();
                                     if (value == true) {
                                       ShowToastDialog.showToast("Updated!!");
                                     } else {
-                                      ShowToastDialog.showToast("Unable to Updated!!");
+                                      ShowToastDialog.showToast(
+                                          "Unable to Updated!!");
                                     }
                                   });
                                 }
                                 Get.back();
                               },
-                              child: Text(myProfileController.vehicleCategoryList[index].libelle.toString())),
+                              child: Text(myProfileController
+                                  .vehicleCategoryList[index].libelle
+                                  .toString())),
                         );
                       },
                     ),
@@ -580,12 +651,13 @@ class MyProfileScreen extends StatelessWidget {
         });
   }
 
-  brandDialog(BuildContext context, List<BrandData>? brandList, MyProfileController myProfileController) {
+  brandDialog(BuildContext context, List<BrandData>? brandList,
+      MyProfileController myProfileController) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Brand list'),
+            title: const Text('Vehicle Brand list'),
             content: SizedBox(
               height: 300.0, // Change as per your requirement
               width: 300.0, // Change as per your requirement
@@ -598,18 +670,23 @@ class MyProfileScreen extends StatelessWidget {
                         return ListTile(
                           title: InkWell(
                               onTap: () {
-                                myProfileController.vBrand.value = brandList[index].name.toString();
-                                myProfileController.vBrandId.value = brandList[index].id.toString();
-                                if (myProfileController.vBrand.value.isNotEmpty) {
+                                myProfileController.vBrand.value =
+                                    brandList[index].name.toString();
+                                myProfileController.vBrandId.value =
+                                    brandList[index].id.toString();
+                                if (myProfileController
+                                    .vBrand.value.isNotEmpty) {
                                   myProfileController.updateVBrand({
-                                    "id_conducteur": myProfileController.userID.value,
+                                    "id_conducteur":
+                                        myProfileController.userID.value,
                                     "brand": myProfileController.vBrandId.value,
                                   }).then((value) {
                                     Get.back();
                                     if (value == true) {
                                       ShowToastDialog.showToast("Updated!!");
                                     } else {
-                                      ShowToastDialog.showToast("Unable to Updated!!");
+                                      ShowToastDialog.showToast(
+                                          "Unable to Updated!!");
                                     }
                                   });
                                 }
@@ -624,12 +701,13 @@ class MyProfileScreen extends StatelessWidget {
         });
   }
 
-  modelDialog(BuildContext context, List<ModelData>? brandList, MyProfileController myProfileController) {
+  modelDialog(BuildContext context, List<ModelData>? brandList,
+      MyProfileController myProfileController) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Model list'),
+            title: const Text('Vehicle Model'),
             content: SizedBox(
               height: 300.0, // Change as per your requirement
               width: 300.0, // Change as per your requirement
@@ -642,18 +720,23 @@ class MyProfileScreen extends StatelessWidget {
                         return ListTile(
                           title: InkWell(
                               onTap: () {
-                                myProfileController.vModel.value = brandList[index].name.toString();
-                                myProfileController.vModelId.value = brandList[index].id.toString();
-                                if (myProfileController.vModel.value.isNotEmpty) {
+                                myProfileController.vModel.value =
+                                    brandList[index].name.toString();
+                                myProfileController.vModelId.value =
+                                    brandList[index].id.toString();
+                                if (myProfileController
+                                    .vModel.value.isNotEmpty) {
                                   myProfileController.updateVModel({
-                                    "id_conducteur": myProfileController.userID.value,
+                                    "id_conducteur":
+                                        myProfileController.userID.value,
                                     "model": myProfileController.vModelId.value,
                                   }).then((value) {
                                     Get.back();
                                     if (value == true) {
                                       ShowToastDialog.showToast("Updated!!");
                                     } else {
-                                      ShowToastDialog.showToast("Unable to Updated!!");
+                                      ShowToastDialog.showToast(
+                                          "Unable to Updated!!");
                                     }
                                   });
                                 }
@@ -691,18 +774,33 @@ class MyProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFieldThem.boxBuildTextField(hintText: title, controller: controller, validators: validators),
+              TextFieldThem.boxBuildTextField(
+                  hintText: title,
+                  controller: controller,
+                  validators: validators),
               const SizedBox(
                 height: 20,
               ),
               Row(
                 children: [
-                  ButtonThem.buildButton(context, title: "Save", btnColor: ConstantColors.primary, txtColor: Colors.white, onPress: onSubmitBtn, btnHeight: 40, btnWidthRatio: 0.3),
+                  ButtonThem.buildButton(context,
+                      title: "Save",
+                      btnColor: ConstantColors.primary,
+                      txtColor: Colors.white,
+                      onPress: onSubmitBtn,
+                      btnHeight: 40,
+                      btnWidthRatio: 0.3),
                   const SizedBox(
                     width: 15,
                   ),
                   ButtonThem.buildBorderButton(context,
-                      title: "Cancel", btnHeight: 40, btnWidthRatio: 0.3, btnColor: Colors.white, txtColor: ConstantColors.primary, onPress: () => Get.back(), btnBorderColor: ConstantColors.primary),
+                      title: "Cancel",
+                      btnHeight: 40,
+                      btnWidthRatio: 0.3,
+                      btnColor: Colors.white,
+                      txtColor: ConstantColors.primary,
+                      onPress: () => Get.back(),
+                      btnBorderColor: ConstantColors.primary),
                 ],
               )
             ],
@@ -811,7 +909,13 @@ class MyProfileScreen extends StatelessWidget {
                     width: 15,
                   ),
                   ButtonThem.buildBorderButton(context,
-                      title: "Cancel", btnHeight: 40, btnWidthRatio: 0.3, btnColor: Colors.white, txtColor: ConstantColors.primary, onPress: () => Get.back(), btnBorderColor: ConstantColors.primary),
+                      title: "Cancel",
+                      btnHeight: 40,
+                      btnWidthRatio: 0.3,
+                      btnColor: Colors.white,
+                      txtColor: ConstantColors.primary,
+                      onPress: () => Get.back(),
+                      btnBorderColor: ConstantColors.primary),
                 ],
               )
             ],
@@ -853,7 +957,8 @@ class MyProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => pickFile1(controller, source: ImageSource.camera),
+                                onPressed: () => pickFile1(controller,
+                                    source: ImageSource.camera),
                                 icon: const Icon(
                                   Icons.camera_alt,
                                   size: 32,
@@ -872,7 +977,8 @@ class MyProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => pickFile1(controller, source: ImageSource.gallery),
+                                onPressed: () => pickFile1(controller,
+                                    source: ImageSource.gallery),
                                 icon: const Icon(
                                   Icons.photo_library_sharp,
                                   size: 32,
@@ -903,7 +1009,8 @@ class MyProfileScreen extends StatelessWidget {
 
   final ImagePicker _imagePicker = ImagePicker();
 
-  Future pickFile1(MyProfileController controller, {required ImageSource source}) async {
+  Future pickFile1(MyProfileController controller,
+      {required ImageSource source}) async {
     try {
       XFile? image = await _imagePicker.pickImage(source: source);
       if (image == null) return;
@@ -913,7 +1020,8 @@ class MyProfileScreen extends StatelessWidget {
           if (value["success"] == "Success") {
             UserModel userModel = Constant.getUserData();
             userModel.userData!.photoPath = value['data']['photo_path'];
-            Preferences.setString(Preferences.user, jsonEncode(userModel.toJson()));
+            Preferences.setString(
+                Preferences.user, jsonEncode(userModel.toJson()));
             controller.getUsrData();
             dashboardController.getUsrData();
             ShowToastDialog.showToast("Upload successfully!");

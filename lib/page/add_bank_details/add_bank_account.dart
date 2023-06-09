@@ -20,6 +20,8 @@ class AddBankAccount extends StatelessWidget {
   var branchNameController = TextEditingController();
   var holderNameController = TextEditingController();
   var accountNumberController = TextEditingController();
+  var reaccountNumberController = TextEditingController();
+
   var otherInformationController = TextEditingController();
   var ifscCodeController = TextEditingController();
 
@@ -28,12 +30,18 @@ class AddBankAccount extends StatelessWidget {
     return GetX<BankDetailsController>(
       init: BankDetailsController(),
       initState: (state) {
-        bankNameController = TextEditingController(text: state.controller!.bankDetails.value.bankName);
-        branchNameController = TextEditingController(text: state.controller!.bankDetails.value.branchName);
-        holderNameController = TextEditingController(text: state.controller!.bankDetails.value.holderName);
-        accountNumberController = TextEditingController(text: state.controller!.bankDetails.value.accountNo);
-        otherInformationController = TextEditingController(text: state.controller!.bankDetails.value.otherInfo);
-        ifscCodeController = TextEditingController(text: state.controller!.bankDetails.value.ifscCode);
+        bankNameController = TextEditingController(
+            text: state.controller!.bankDetails.value.bankName);
+        branchNameController = TextEditingController(
+            text: state.controller!.bankDetails.value.branchName);
+        holderNameController = TextEditingController(
+            text: state.controller!.bankDetails.value.holderName);
+        accountNumberController = TextEditingController(
+            text: state.controller!.bankDetails.value.accountNo);
+        otherInformationController = TextEditingController(
+            text: state.controller!.bankDetails.value.otherInfo);
+        ifscCodeController = TextEditingController(
+            text: state.controller!.bankDetails.value.ifscCode);
       },
       builder: (controller) {
         return Scaffold(
@@ -67,7 +75,9 @@ class AddBankAccount extends StatelessWidget {
                         children: [
                           Text(
                             'Bank Name',
-                            style: TextStyle(color: Colors.black.withOpacity(0.50), fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.50),
+                                fontWeight: FontWeight.w500),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 8),
@@ -83,16 +93,20 @@ class AddBankAccount extends StatelessWidget {
                               },
                               decoration: const InputDecoration(
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   contentPadding: EdgeInsets.all(8)),
                             ),
@@ -101,7 +115,9 @@ class AddBankAccount extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 18.0),
                             child: Text(
                               'Branch Name',
-                              style: TextStyle(color: Colors.black.withOpacity(0.50), fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.50),
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           Padding(
@@ -118,16 +134,20 @@ class AddBankAccount extends StatelessWidget {
                               },
                               decoration: const InputDecoration(
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   contentPadding: EdgeInsets.all(8)),
                             ),
@@ -135,8 +155,10 @@ class AddBankAccount extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 18.0),
                             child: Text(
-                              'Holder Name',
-                              style: TextStyle(color: Colors.black.withOpacity(0.50), fontWeight: FontWeight.w500),
+                              'Account Holder Full Name',
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.50),
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           Padding(
@@ -153,16 +175,20 @@ class AddBankAccount extends StatelessWidget {
                               },
                               decoration: const InputDecoration(
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   contentPadding: EdgeInsets.all(8)),
                             ),
@@ -171,7 +197,9 @@ class AddBankAccount extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 18.0),
                             child: Text(
                               'Account Number',
-                              style: TextStyle(color: Colors.black.withOpacity(0.50), fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.50),
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           Padding(
@@ -188,16 +216,62 @@ class AddBankAccount extends StatelessWidget {
                               },
                               decoration: const InputDecoration(
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
+                                  ),
+                                  contentPadding: EdgeInsets.all(8)),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 18.0),
+                            child: Text(
+                              'Re-enter Account Number',
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.50),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: TextFormField(
+                              controller: reaccountNumberController,
+                              keyboardType: TextInputType.text,
+                              validator: (String? value) {
+                                if (value!.isNotEmpty &&
+                                    value == accountNumberController.text) {
+                                  return null;
+                                } else {
+                                  return 'Account number is not Matched';
+                                }
+                              },
+                              decoration: const InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   contentPadding: EdgeInsets.all(8)),
                             ),
@@ -206,7 +280,9 @@ class AddBankAccount extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 18.0),
                             child: Text(
                               'IFSC Code',
-                              style: TextStyle(color: Colors.black.withOpacity(0.50), fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.50),
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           Padding(
@@ -223,75 +299,95 @@ class AddBankAccount extends StatelessWidget {
                               },
                               decoration: const InputDecoration(
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
                                   ),
                                   contentPadding: EdgeInsets.all(8)),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 18.0),
-                            child: Text(
-                              'Other information',
-                              style: TextStyle(color: Colors.black.withOpacity(0.50), fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8),
-                            child: TextFormField(
-                              controller: otherInformationController,
-                              keyboardType: TextInputType.text,
-                              validator: (String? value) {
-                                if (value!.isNotEmpty) {
-                                  return null;
-                                } else {
-                                  return 'required'.tr;
-                                }
-                              },
-                              decoration: const InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                                  ),
-                                  contentPadding: EdgeInsets.all(8)),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(top: 18.0),
+                          //   child: Text(
+                          //     'Other information',
+                          //     style: TextStyle(
+                          //         color: Colors.black.withOpacity(0.50),
+                          //         fontWeight: FontWeight.w500),
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(top: 8),
+                          //   child: TextFormField(
+                          //     controller: otherInformationController,
+                          //     keyboardType: TextInputType.text,
+                          //     validator: (String? value) {
+                          //       if (value!.isNotEmpty) {
+                          //         return null;
+                          //       } else {
+                          //         return 'required'.tr;
+                          //       }
+                          //     },
+                          //     decoration: const InputDecoration(
+                          //         focusedBorder: OutlineInputBorder(
+                          //           borderSide: BorderSide(
+                          //               color: Colors.grey, width: 1.0),
+                          //         ),
+                          //         enabledBorder: OutlineInputBorder(
+                          //           borderSide: BorderSide(
+                          //               color: Colors.grey, width: 1.0),
+                          //         ),
+                          //         errorBorder: OutlineInputBorder(
+                          //           borderSide: BorderSide(
+                          //               color: Colors.grey, width: 1.0),
+                          //         ),
+                          //         border: OutlineInputBorder(
+                          //           borderSide: BorderSide(
+                          //               color: Colors.grey, width: 1.0),
+                          //         ),
+                          //         contentPadding: EdgeInsets.all(8)),
+                          //   ),
+                          // ),
                           Center(
                             child: Padding(
                               padding: const EdgeInsets.only(top: 45),
-                              child: ButtonThem.buildButton(context, btnHeight: 44, title: isEdit ? "Edit bank" : "Add bank", btnColor: ConstantColors.primary, txtColor: Colors.black, onPress: () {
+                              child: ButtonThem.buildButton(context,
+                                  btnHeight: 44,
+                                  title: isEdit ? "Edit bank" : "Add bank",
+                                  btnColor: ConstantColors.primary,
+                                  txtColor: Colors.black, onPress: () {
                                 if (_formKey.currentState!.validate()) {
                                   Map<String, String> bodyParams = {
-                                    'driver_id': Preferences.getInt(Preferences.userId).toString(),
+                                    'driver_id':
+                                        Preferences.getInt(Preferences.userId)
+                                            .toString(),
                                     'bank_name': bankNameController.text,
                                     'branch_name': branchNameController.text,
                                     'holder_name': holderNameController.text,
                                     'account_no': accountNumberController.text,
-                                    'information': otherInformationController.text,
+                                    'information':
+                                        otherInformationController.text,
                                     'ifsc_code': ifscCodeController.text
                                   };
 
-                                  controller.setBankDetails(bodyParams).then((value) {
+                                  controller
+                                      .setBankDetails(bodyParams)
+                                      .then((value) {
                                     if (value != null) {
                                       Get.back(result: true);
                                     } else {
-                                      ShowToastDialog.showToast("Something want wrong.");
+                                      ShowToastDialog.showToast(
+                                          "Something want wrong.");
                                     }
                                   });
                                 }

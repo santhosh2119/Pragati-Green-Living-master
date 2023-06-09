@@ -16,6 +16,7 @@ class PhoneNumberController extends GetxController {
   RxBool isPhoneValid = false.obs;
 
   sendCode(String phoneNumber) async {
+    print(phoneNumber);
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) {},
@@ -38,7 +39,8 @@ class PhoneNumberController extends GetxController {
   Future<bool?> phoneNumberIsExit(Map<String, String> bodyParams) async {
     try {
       ShowToastDialog.showLoader("Please wait");
-      final response = await http.post(Uri.parse(API.getExistingUserOrNot), headers: API.header, body: jsonEncode(bodyParams));
+      final response = await http.post(Uri.parse(API.getExistingUserOrNot),
+          headers: API.header, body: jsonEncode(bodyParams));
       log("---->");
       log(bodyParams.toString());
       log(response.body);
@@ -50,12 +52,14 @@ class PhoneNumberController extends GetxController {
         } else {
           return false;
         }
-      } else if (response.statusCode == 200 && responseBody['success'] == "Failed") {
+      } else if (response.statusCode == 200 &&
+          responseBody['success'] == "Failed") {
         ShowToastDialog.closeLoader();
         ShowToastDialog.showToast(responseBody['error']);
       } else {
         ShowToastDialog.closeLoader();
-        ShowToastDialog.showToast('Something want wrong. Please try again later');
+        ShowToastDialog.showToast(
+            'Something want wrong. Please try again later');
         throw Exception('Failed to load album');
       }
     } on TimeoutException catch (e) {
@@ -74,21 +78,25 @@ class PhoneNumberController extends GetxController {
     return null;
   }
 
-  Future<UserModel?> getDataByPhoneNumber(Map<String, String> bodyParams) async {
+  Future<UserModel?> getDataByPhoneNumber(
+      Map<String, String> bodyParams) async {
     try {
       ShowToastDialog.showLoader("Please wait");
-      final response = await http.post(Uri.parse(API.getProfileByPhone), headers: API.header, body: jsonEncode(bodyParams));
+      final response = await http.post(Uri.parse(API.getProfileByPhone),
+          headers: API.header, body: jsonEncode(bodyParams));
       log(response.body);
       Map<String, dynamic> responseBody = json.decode(response.body);
       if (response.statusCode == 200 && responseBody['success'] == "success") {
         ShowToastDialog.closeLoader();
         return UserModel.fromJson(responseBody);
-      } else if (response.statusCode == 200 && responseBody['success'] == "Failed") {
+      } else if (response.statusCode == 200 &&
+          responseBody['success'] == "Failed") {
         ShowToastDialog.closeLoader();
         ShowToastDialog.showToast(responseBody['error']);
       } else {
         ShowToastDialog.closeLoader();
-        ShowToastDialog.showToast('Something want wrong. Please try again later');
+        ShowToastDialog.showToast(
+            'Something want wrong. Please try again later');
         throw Exception('Failed to load album');
       }
     } on TimeoutException catch (e) {

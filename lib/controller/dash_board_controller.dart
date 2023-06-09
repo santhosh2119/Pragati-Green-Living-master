@@ -74,7 +74,7 @@ class DashBoardController extends GetxController {
     DrawerItem('canceled'.tr, Icons.cancel_outlined),
     DrawerItem('Documents'.tr, Icons.domain_verification),
     DrawerItem('my_profile'.tr, Icons.person_outline),
-    DrawerItem('Car Service History'.tr, Icons.miscellaneous_services),
+    // DrawerItem('Car Service History'.tr, Icons.miscellaneous_services),
     DrawerItem('My Earnings'.tr, Icons.account_balance_wallet_outlined),
     DrawerItem('Add Bank'.tr, Icons.account_balance),
     DrawerItem('change_language'.tr, Icons.language),
@@ -85,7 +85,7 @@ class DashBoardController extends GetxController {
   ];
 
   onSelectItem(int index) {
-    if (index == 14) {
+    if (index == 13) {
       Preferences.clearKeyData(Preferences.isLogin);
       Preferences.clearKeyData(Preferences.user);
       Preferences.clearKeyData(Preferences.userId);
@@ -168,19 +168,19 @@ class DashBoardController extends GetxController {
         return DocumentStatusScreen();
       case 6:
         return MyProfileScreen();
+      // case 7:
+      //   return const CarServiceBookHistory();
       case 7:
-        return const CarServiceBookHistory();
-      case 8:
         return WalletScreen();
-      case 9:
+      case 8:
         return const ShowBankDetails();
-      case 10:
+      case 9:
         return const LocalizationScreens(intentType: "dashBoard");
-      case 11:
+      case 10:
         return const ContactUsScreen();
-      case 12:
+      case 11:
         return const TermsOfServiceScreen();
-      case 13:
+      case 12:
         return const PrivacyPolicyScreen();
       default:
         return const Text("Error");

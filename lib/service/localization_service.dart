@@ -9,6 +9,8 @@ import 'package:cabme_driver/lang/app_zh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../lang/app_te.dart';
+
 class LocalizationService extends Translations {
   // Default locale
   static const locale = Locale('en', 'US');
@@ -18,7 +20,8 @@ class LocalizationService extends Translations {
     // const Locale('fr'),
     // const Locale('zh'),
     // const Locale('ja'),
-    // const Locale('hi'),
+    const Locale('te'),
+    const Locale('hi'),
     // const Locale('de'),
     // const Locale('pt'),
     // const Locale('ru'),
@@ -29,13 +32,14 @@ class LocalizationService extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en': enUS,
-        'fr': trFR,
-        'zh': zhCH,
-        'ja': jaJP,
+        'te': teIN,
+        // 'fr': trFR,
+        // 'zh': zhCH,
+        // 'ja': jaJP,
         'hi': hiIN,
-        'de': deGR,
-        'pt': ptPO,
-        'ru': ruRU,
+        // 'de': deGR,
+        // 'pt': ptPO,
+        // 'ru': ruRU,
       };
 
   // Gets locale from language, and updates the locale
